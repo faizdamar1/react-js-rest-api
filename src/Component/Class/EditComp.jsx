@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import qs from "querystring";
 import {
   Container,
   Col,
@@ -15,16 +15,47 @@ import {
 
 const api = "http://localhost:3001";
 class EditComp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id_mahasiswa: this.props.location.state.id_mahasiswa,
+      nim: this.props.location.state.nim,
+      nama: this.props.location.state.nama,
+      jurusan: this.props.location.state.jurusan,
+      response: "",
+      display: "none",
+    };
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
-  constructor(props) {
-    super(props);
 
-    this.state = {};
-  }
+  ubahMahasiswa = (idMahasiswa) => {
+    console.log(idMahasiswa);
+    const data = qs.stringify({
+      id_mahasiswa: idMahasiswa,
+      nim: this.state.nim,
+      nama: this.state.nama,
+      jurusan: this.state.jurusan,
+    });
+    axios.put(api + "/ubah/mahasiswa", data).then((json) => {
+      if (json === 200) {
+        this.setState({
+          response: json.data.values,
+          display: "block",
+        });
+      } else {
+        this.setState({
+          response: json.data.values,
+          display: "block",
+        });
+      }
+    });
+  };
+
   render() {
     return (
       <div>
@@ -44,7 +75,7 @@ class EditComp extends Component {
                 <Row>
                   <Label>NIM</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="nim"
                     value={this.state.nim}
                     onChange={this.handleChange}
@@ -56,7 +87,7 @@ class EditComp extends Component {
                 <Row>
                   <Label>Nama</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="nama"
                     value={this.state.nama}
                     onChange={this.handleChange}
@@ -68,7 +99,7 @@ class EditComp extends Component {
                 <Row>
                   <Label>Jurusan</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="jurusan"
                     value={this.state.jurusan}
                     onChange={this.handleChange}
@@ -78,7 +109,10 @@ class EditComp extends Component {
               </FormGroup>
               <FormGroup>
                 <Row>
-                  <Button type="button" onClick={this.AddMahasiswa}>
+                  <Button
+                    type="button"
+                    onClick={() => this.ubahMahasiswa(this.state.id_mahasiswa)}
+                  >
                     Ubah
                   </Button>
                 </Row>

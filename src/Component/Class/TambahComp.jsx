@@ -83,7 +83,7 @@ export default class TambahComp extends Component {
                 <Row>
                   <Label>NIM</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="nim"
                     value={this.state.nim}
                     onChange={this.handleChange}
@@ -95,7 +95,7 @@ export default class TambahComp extends Component {
                 <Row>
                   <Label>Nama</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="nama"
                     value={this.state.nama}
                     onChange={this.handleChange}
@@ -107,7 +107,7 @@ export default class TambahComp extends Component {
                 <Row>
                   <Label>Jurusan</Label>
                   <Input
-                    type="tex"
+                    type="text"
                     name="jurusan"
                     value={this.state.jurusan}
                     onChange={this.handleChange}

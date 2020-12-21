@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Jumbotron } from "reactstrap";
+import { CartContext } from "../../Context/CartContext ";
 
 export default function HomePage() {
   return (
     <div>
       <Jumbotron>
-        <h1 className="display-3">Home Page</h1>
+        <h1 className="display-3">Home Page </h1>
         <p className="lead">
           This is a simple hero unit, a simple Jumbotron-style component for
           calling extra attention to featured content or information.
